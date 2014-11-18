@@ -85,16 +85,21 @@ default_loop_filter = swiftnav.track.SimpleTrackingLoop(
   1e3              # Loop frequency
 )
 
+aided_loop_filter = swiftnav.track.AidedTrackingLoop(
+  (2, 0.7, 1),     # Code loop parameters
+  1e3              # Loop frequency
+)
+
 def track(samples, channels,
           ms_to_track=None,
           sampling_freq=defaults.sampling_freq,
           chipping_rate=defaults.chipping_rate,
           IF=defaults.IF,
           show_progress=True,
-          loop_filter=default_loop_filter,
-          stage2_delay = 100,
+          loop_filter=aided_loop_filter,
+          stage2_delay = 7000,
           correlator=swiftnav.correlate.track_correlate,
-          num_ms=4):
+          num_ms=1):
 
   n_channels = len(channels)
 
